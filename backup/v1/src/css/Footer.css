@@ -1,0 +1,42 @@
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 10px;
+    /* Reducir el padding para hacer el footer más alto */
+    border-top: 1px solid #ddd;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.footer-content .social-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    /* Añadir un poco de margen entre los iconos y el texto */
+}
+
+.footer-content .social-icons a {
+    margin: 0 10px;
+}
+
+.footer-content .social-icons img {
+    width: 24px;
+    height: 24px;
+}
+
+.footer-content p {
+    font-size: 0.9rem;
+    margin: 0;
+    /* Eliminar el margen por defecto del párrafo */
+}

@@ -1,0 +1,20 @@
+.main-button {
+    background-color: #8df18d;
+    border: none;
+    border-radius: 15px;
+    padding: 20px;
+    width: 45%;
+    max-width: 600px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #070c07;
+    /* Añade un color de texto visible */
+    font-size: 1.5rem;
+}
+
+.main-button:hover {
+    background-color: #7ae27a;
+}
