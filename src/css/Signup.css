@@ -1,0 +1,83 @@
+.signup-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    padding: 20px;
+    background-color: #f7f7f7;
+}
+
+.signup-left {
+    flex: 1;
+    padding: 40px;
+    background: linear-gradient(135deg, #4caf50, #81c784);
+    color: white;
+    border-radius: 15px 0 0 15px;
+}
+
+.signup-left h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.signup-left ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.2rem;
+}
+
+.signup-left ul li::before {
+    content: '✓';
+    margin-right: 10px;
+    color: #ffffff;
+}
+
+.signup-right {
+    flex: 1;
+    padding: 40px;
+    background-color: white;
+    border-radius: 0 15px 15px 0;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.signup-right h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+}
+
+.google-button,
+.email-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: 1px solid #4caf50;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.google-button:hover,
+.email-button:hover {
+    background-color: #f1f1f1;
+}
+
+.google-button img {
+    height: 20px;
+    margin-right: 10px;
+}
+
+.role-selection label {
+    display: block;
+    margin: 10px 0;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.role-selection input {
+    margin-right: 10px;
+}
