@@ -1,71 +1,110 @@
+/* src/css/Header.css */
+
+/* Estilo general del encabezado */
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: white;
-    padding: 0px 20px;
-    /* Reducir el padding para hacer el header más alto */
+    padding: 10px 20px;
+    /* Reducido para un encabezado más compacto */
     border-bottom: 1px solid #ddd;
-    margin: 0;
-    /* Asegurarse de que no haya margen extra */
+    box-sizing: border-box;
 }
 
-
-.chambi-title h1 {
-    font-size: 5rem;
-    color: #01010c;
-    margin: 0;
+/* Estilo del lado izquierdo del encabezado */
+.header-left {
+    display: flex;
+    align-items: center;
 }
 
-.header-left p {
-    font-size: 0.73rem;
-    color: #5a5a5a;
-    margin: 5px 0 0 0;
-    font-weight: bold;
-    /* o 700, 800, 900 para diferentes grosores */
-}
-
-.header-right a {
-    margin: 0px 6px;
-    color: #626368;
-    /* Color de letra */
+/* Enlace que engloba el logo y el título "Chambi" */
+.chambi-link {
+    display: flex;
+    align-items: center;
     text-decoration: none;
     /* Eliminar subrayado */
+}
+
+/* Logo de Chambi */
+.chambi-logo {
+    width: 50px;
+    /* Ajusta el tamaño según necesidad */
+    height: 50px;
+    margin-right: 10px;
+}
+
+/* Título "Chambi" */
+.chambi-title {
+    font-size: 1.8rem;
+    /* <-- Cambia este valor para ajustar el tamaño del texto principal */
+    color: #000000;
+    /* Letras negras */
+    margin: 0;
+    /* Sin margen adicional */
+    font-weight: 600;
+    /* Negrita moderada */
+    display: inline-block;
+}
+
+/* Estilo del lado derecho del encabezado */
+.header-right {
+    display: flex;
+    align-items: center;
+}
+
+/* Enlaces de navegación */
+.header-right .nav-link {
+    margin: 0 10px;
+    /* Espaciado entre enlaces */
+    color: #626368;
+    /* Gris elegante */
+    text-decoration: none;
+    /* Sin subrayado */
     transition: color 0.3s ease;
-    /* Transición suave para el color */
-    font-weight: bold;
-    /* o 700, 800, 900 para diferentes grosores */
-
+    /* Transición suave al pasar el mouse */
+    font-weight: 500;
+    /* Negrita moderada */
+    font-size: 1rem;
+    /* Tamaño de fuente consistente */
 }
 
-.header-right a:hover {
-    text-decoration: none;
-    /* Mantener sin subrayado */
-}
-
-.header-right a.about:hover {
+/* Efecto hover para todos los enlaces excepto "Unirse" */
+.header-right .nav-link:not(.unirse):hover {
     color: #81f581;
-    /* Color de letra al pasar el mouse para About */
+    /* Verde pastel al pasar el mouse */
 }
 
-.header-right a.offer-services:hover {
-    color: #81f581;
-    /* Color de letra al pasar el mouse para Offer your services */
+/* Estilo específico para "Unirse" */
+.header-right .unirse {
+    color: #7BE37B;
+    /* Verde que resalta */
+    font-weight: 600;
+    /* Negrita para mayor énfasis */
 }
 
-.header-right a.log-in:hover {
-    color: #81f581;
-    /* Color de letra al pasar el mouse para Log in */
-}
-
-.header-right a.join {
+/* Efecto hover para "Unirse" */
+.header-right .unirse:hover {
     color: #58e658;
-    /* Color de letra para Join */
+    /* Verde más oscuro al pasar el mouse */
 }
 
-.header-right a.join:hover {
-    color: #54a054;
-    /* Color de letra al pasar el mouse para Join */
-    text-decoration: none;
-    /* Mantener sin subrayado */
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .header-left {
+        margin-bottom: 10px;
+    }
+
+    .header-right {
+        flex-wrap: wrap;
+    }
+
+    .header-right .nav-link {
+        margin: 5px;
+    }
 }

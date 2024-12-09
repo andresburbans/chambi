@@ -6,8 +6,8 @@ import RegistroCliente from './pages/RegistroCliente';
 import RegistroExperto from './pages/RegistroExperto';
 import SearchServices from './pages/SearchServices';
 // Importa los componentes Header y Footer si los vas a usar
-import Header from './components/Header';
-import Footer from './components/Footer';
+//import Header from './components/Header';
+//import Footer from './components/Footer';
 
 function App() {
   return (

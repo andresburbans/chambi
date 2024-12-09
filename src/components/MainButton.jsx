@@ -1,9 +1,12 @@
-import React from 'react';
+// src/components/MainButton.jsx
 
-const MainButton = ({ onClick, text }) => {
+import React from 'react';
+import '../css/MainButton.css'; // Asegúrate de tener este archivo
+
+const MainButton = ({ label, onClick }) => {
     return (
-        <button onClick={onClick} className="main-button">
-            {text}
+        <button className="main-button" onClick={onClick}>
+            {label}
         </button>
     );
 };

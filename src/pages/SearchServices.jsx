@@ -56,7 +56,7 @@ const SearchServices = () => {
     }
 
     const handleSearch = () => {
-        const priceToCompare = getPrice();
+        // const priceToCompare = getPrice();
 
         const filteredResults = services.filter((service) => {
             const matchesComuna = service.comuna === selectedComuna || selectedComuna === "";
