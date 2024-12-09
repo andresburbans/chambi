@@ -1,0 +1,71 @@
+.search-services {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.filters {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    /* Para que salte de línea si la pantalla es muy pequeña */
+}
+
+.filters select,
+.filters button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: auto;
+    /* Asegura que los selects y el botón no ocupen todo el ancho */
+}
+
+.content {
+    display: flex;
+}
+
+.results {
+    width: 50%;
+    border-right: 1px solid #ddd;
+    padding-right: 10px;
+    overflow-y: auto;
+    height: 70vh;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.card:hover {
+    background: #f9f9f9;
+}
+
+.details {
+    width: 50%;
+    padding-left: 10px;
+}
+
+.details h2 {
+    margin-top: 0;
+}
+
+.details button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.details button:hover {
+    background-color: #0056b3;
+}

@@ -10,8 +10,10 @@
     /* Asegurarse de que no haya margen extra */
 }
 
-.header-left h1 {
-    font-size: 2.5rem;
+
+.chambi-title h1 {
+    font-size: 5rem;
+    color: #01010c;
     margin: 0;
 }
 

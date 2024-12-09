@@ -1,32 +1,63 @@
-.registro-clientes-container {
-    max-width: 600px;
-    margin: 0 auto;
+.registro-cliente-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    /* Fondo general */
     padding: 20px;
-    background: #f7f7f7;
+}
+
+.registro-cliente-card {
+    /* Nueva clase para la tarjeta */
+    background-color: white;
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.registro-clientes-form label {
-    display: block;
-    margin: 15px 0;
-    font-size: 1rem;
-}
-
-.registro-clientes-form input,
-.registro-clientes-form select {
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 500px;
     width: 100%;
+}
+
+.registro-cliente-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.registro-cliente-form label {
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #555;
+    /* Color del texto de la etiqueta */
+}
+
+.registro-cliente-form input,
+.registro-cliente-form select {
     padding: 10px;
-    margin-top: 5px;
+    margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-.registro-clientes-submit {
-    background-color: #4caf50;
+.registro-cliente-form button {
+    background-color: #28a745;
+    /* Color verde pastel para el botón */
     color: white;
-    padding: 10px 20px;
+    padding: 12px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    /* Transición suave */
+}
+
+.registro-cliente-form button:hover {
+    background-color: #218838;
+    /* Color más oscuro al pasar el ratón */
+}
+
+h1 {
+    text-align: center;
+    color: #f5f5f5;
+    /* verde pastel */
+    margin-bottom: 20px;
 }

@@ -1,32 +1,119 @@
-.registro-expertos-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    background: #f7f7f7;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+/* Ajustes para centrar vertical y horizontalmente la tarjeta, sin scroll, y con colores adecuados */
+
+/* Ajustamos el body y html */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #E8F9E8;
+    /* Fondo pastel muy claro */
 }
 
-.registro-expertos-form label {
-    display: block;
-    margin: 15px 0;
-    font-size: 1rem;
+/* Contenedor principal:
+   - 100vh para usar la altura completa del viewport
+   - Flexbox para centrar horizontal y verticalmente */
+.registro-experto-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    /* Evitamos scroll */
 }
 
-.registro-expertos-form input,
-.registro-expertos-form select {
+/* Tarjeta centrada, con menos padding vertical y tamaño compacto */
+.registro-experto-card {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    padding: 20px 30px;
+    max-width: 450px;
     width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    text-align: center;
+    border: 1px solid #CCF0CC;
+    box-sizing: border-box;
 }
 
-.registro-expertos-submit {
-    background-color: #4caf50;
-    color: white;
-    padding: 10px 20px;
+/* Título */
+.registro-experto-card h1 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Formulario */
+.registro-experto-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Etiquetas y campos con menor espacio vertical */
+.registro-experto-form label {
+    width: 90%;
+    margin-bottom: 5px;
+    color: #555;
+    font-weight: 500;
+    text-align: left;
+    font-size: 0.9rem;
+}
+
+.registro-experto-form input,
+.registro-experto-form select {
+    width: 90%;
+    padding: 8px;
+    margin-bottom: 12px;
+    border: 1px solid #C2E3C2;
+    border-radius: 8px;
+    background-color: #F8FCF8;
+    color: #333;
+    font-size: 0.9rem;
+    transition: border 0.3s ease;
+    box-sizing: border-box;
+}
+
+.registro-experto-form input:focus,
+.registro-experto-form select:focus {
+    outline: none;
+    border: 1px solid #7BE37B;
+}
+
+/* Botones */
+.registro-experto-form button {
+    width: 90%;
+    padding: 10px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    margin-top: 8px;
+    box-sizing: border-box;
+}
+
+/* Botón principal: Registrarse (verde pastel) */
+.registro-experto-form button[type="submit"] {
+    background-color: #A4EDA4;
+    color: #333;
+}
+
+.registro-experto-form button[type="submit"]:hover {
+    background-color: #7BE37B;
+    color: #fff;
+}
+
+/* Botón secundario: Obtener Ubicación (un gris oscuro elegante que contraste) */
+.registro-experto-form button[type="button"] {
+    background-color: #333;
+    color: #fff;
+    margin-top: 0;
+}
+
+.registro-experto-form button[type="button"]:hover {
+    background-color: #555;
+    color: #fff;
 }

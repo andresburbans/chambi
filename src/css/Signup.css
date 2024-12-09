@@ -1,83 +1,313 @@
+/* signup.css - Estilo minimalista, elegante, pastel y coherente con el diseño previo */
+
+/* Ajustes generales */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #E8F9E8;
+    /* Fondo pastel muy claro */
+    box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
 .signup-container {
     display: flex;
-    align-items: center;
     justify-content: center;
+    align-items: center;
     height: 100vh;
+    overflow: hidden;
+    /* Evitamos scroll */
     padding: 20px;
-    background-color: #f7f7f7;
 }
 
+.signup-card {
+    display: flex;
+    width: 900px;
+    max-width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    background-color: #FFFFFF;
+    border: 1px solid #CCF0CC;
+}
+
+/* Panel izquierdo (informativo):
+   Un verde pastel un poco más oscuro para mayor contraste */
 .signup-left {
     flex: 1;
+    background: linear-gradient(135deg, #68C468 0%, #7BE37B 100%);
+    color: #FFF;
     padding: 40px;
-    background: linear-gradient(135deg, #4caf50, #81c784);
-    color: white;
-    border-radius: 15px 0 0 15px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    /* Centra verticalmente el contenido */
+    position: relative;
+    /* Para posicionar el pseudo-elemento del logo */
+    overflow: hidden;
+    /* Asegura que el logo no sobresalga */
 }
 
+/* Pseudo-elemento para el logo de fondo */
+.signup-left::before {
+    content: "";
+    background-image: url('../pages/chambi-logo.png');
+    /* Ruta al logo */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 120%;
+    /* Ajusta el tamaño del logo según necesidad */
+    opacity: 1;
+    /* Ajusta la transparencia para no interferir con el texto */
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    /* Debajo del contenido */
+}
+
+/* Asegurar que el contenido esté por encima del pseudo-elemento */
+.signup-left>* {
+    position: relative;
+    z-index: 1;
+}
+
+/* Título panel izquierdo */
+/* Aquí puedes cambiar el tamaño de letra de "No más problemas..." */
 .signup-left h1 {
-    font-size: 2rem;
     margin-bottom: 20px;
+    font-size: 2.5rem;
+    /* <-- Cambia este valor para ajustar el tamaño del texto principal */
+    line-height: 1.3;
+    font-weight: 600;
 }
 
 .signup-left ul {
     list-style: none;
     padding: 0;
-    font-size: 1.2rem;
+    margin: 0;
+}
+
+.signup-left ul li {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
 }
 
 .signup-left ul li::before {
-    content: '✓';
+    content: "✓";
     margin-right: 10px;
-    color: #ffffff;
+    color: #FFF;
+    font-weight: bold;
 }
 
+/* Panel derecho (formulario):
+   Centramos todos los elementos vertical y horizontalmente */
 .signup-right {
     flex: 1;
     padding: 40px;
-    background-color: white;
-    border-radius: 0 15px 15px 0;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Centra horizontalmente */
+    justify-content: center;
+    /* Centra verticalmente */
     text-align: center;
+    /* Alinea el texto al centro */
 }
 
 .signup-right h2 {
-    font-size: 1.5rem;
     margin-bottom: 20px;
+    color: #333;
+    font-size: 1.4rem;
+    font-weight: 600;
 }
 
+.signup-right p {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 0.95rem;
+}
+
+.signup-right a {
+    color: #7BE37B;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.signup-right a:hover {
+    color: #68C468;
+}
+
+/* Botones de Google y Email */
 .google-button,
 .email-button {
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: 10px 0;
+    gap: 10px;
     padding: 10px 20px;
-    font-size: 1rem;
-    border: 1px solid #4caf50;
-    border-radius: 5px;
-    background-color: white;
+    border: 1px solid #C2E3C2;
+    border-radius: 8px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
     cursor: pointer;
-    transition: 0.3s ease;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    /* Ajusta el ancho al contenedor */
+    max-width: 300px;
+    /* Limita el ancho máximo */
 }
 
 .google-button:hover,
 .email-button:hover {
-    background-color: #f1f1f1;
+    background-color: #F0FBF0;
 }
 
-.google-button img {
+.google-icon {
+    width: 20px;
     height: 20px;
-    margin-right: 10px;
+}
+
+/* Campos de entrada (email y password) */
+.input-field {
+    width: 100%;
+    max-width: 300px;
+    /* Limita el ancho máximo */
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #C2E3C2;
+    border-radius: 8px;
+    background-color: #F8FCF8;
+    color: #333;
+    font-size: 0.9rem;
+    transition: border 0.3s ease;
+    box-sizing: border-box;
+}
+
+.input-field:focus {
+    outline: none;
+    border: 1px solid #7BE37B;
+}
+
+/* Selección de rol */
+.role-selection {
+    margin-top: 20px;
+    text-align: left;
+    width: 100%;
+    max-width: 300px;
+    /* Alineado con el resto de los elementos */
+}
+
+.role-selection h3 {
+    margin-bottom: 10px;
+    color: #333;
+    font-weight: 500;
+    text-align: left;
+}
+
+.role-selection div {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .role-selection label {
-    display: block;
-    margin: 10px 0;
-    font-size: 1rem;
+    margin-left: 5px;
+    color: #555;
+    font-size: 0.95rem;
     cursor: pointer;
 }
 
-.role-selection input {
-    margin-right: 10px;
+.role-selection input[type="radio"] {
+    accent-color: #7BE37B;
+}
+
+/* Botón continuar/registrar */
+.continue-button {
+    background-color: #68C468;
+    /* Verde más oscuro y elegante */
+    color: #333;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.continue-button:hover {
+    background-color: #5AB05A;
+    /* Un verde aún más oscuro para el hover */
+    color: #FFF;
+}
+
+/* Texto de términos */
+.terms-text {
+    margin-top: 20px;
+    font-size: 0.8rem;
+    /* <-- Tamaño de letra reducido a la mitad */
+    color: #777;
+    line-height: 1.2;
+    text-align: justify;
+    /* Justificado */
+    padding: 0 15px;
+    box-sizing: border-box;
+    max-width: 300px;
+    margin-bottom: 10px;
+    /* Reducir spacing */
+}
+
+.terms-text a {
+    color: #7BE37B;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.terms-text a:hover {
+    color: #68C468;
+}
+
+/* Botón "Obtener Ubicación" */
+/* Asegúrate de que este botón esté en el componente correspondiente */
+.signup-right .obtener-ubicacion-button {
+    background-color: #555555;
+    /* Color gris oscuro elegante */
+    color: #FFF;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.signup-right .obtener-ubicacion-button:hover {
+    background-color: #333333;
+    /* Más oscuro al hacer hover */
+    color: #FFF;
 }

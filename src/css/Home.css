@@ -38,6 +38,11 @@
     color: #070c07;
 }
 
+.Chambi-text h1 {
+    font-size: 4rem;
+    color: #070c07;
+}
+
 .button-container {
     display: flex;
     justify-content: center;
