@@ -3,8 +3,8 @@ import { db } from "../firebaseConfig";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import Header from '../components/Header-perfil';
 import Footer from '../components/Footer';
-import '../css/AddEspecialidad.css';
 import '../css/Header-perfil.css';
+import '../css/AddEspecialidad.css'; // Asegúrate de que aquí existe el archivo con las clases renombradas.
 
 const AddEspecialidad = () => {
     const [specialtiesData, setSpecialtiesData] = useState([]);
@@ -148,11 +148,11 @@ const AddEspecialidad = () => {
     return (
         <>
             <Header />
-            <div className="add-especialidad-container">
-                {locationError && <div className="error-message">{locationError}</div>}
-                <div className="add-especialidad-card">
+            <div className="aadde-especialidaad-container">
+                {locationError && <div className="eerroor-message">{locationError}</div>}
+                <div className="aadde-especialidaad-caard">
                     <h1>Agregar una Especialidad</h1>
-                    <form onSubmit={handleSubmit} className="add-especialidad-form">
+                    <form onSubmit={handleSubmit} className="aadde-especialidaad-foorm">
                         <label>Campo</label>
                         <select onChange={(e) => handleFieldChange(e.target.value)}>
                             <option value="">Selecciona un campo</option>

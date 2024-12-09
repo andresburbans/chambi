@@ -4,7 +4,8 @@ body {
     padding: 0;
     height: 100%;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #E8F9E8;
+    background: linear-gradient(135deg, #E8F9E8 0%, #CFF3CF 100%);
+    color: #333;
     box-sizing: border-box;
 }
 
@@ -14,65 +15,132 @@ body {
     box-sizing: inherit;
 }
 
-.perifeel-experto-container {
+.paerifeela-expertao-containera {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Hero con efecto glassmorphism */
+.paerifeela-expertao-hero {
+    flex: 1;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    padding: 20px;
+    padding: 40px 20px;
+    background: transparent;
 }
 
-.perifeel-experto-caard {
-    background-color: #FFFFFF;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-    padding: 20px 30px;
+/* Tarjeta principal del perfil */
+.paerifeela-expertao-profile-card {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(124, 226, 124, 0.3);
+    border-radius: 20px;
     max-width: 500px;
     width: 100%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
     text-align: center;
-    border: 1px solid #CCF0CC;
-    box-sizing: border-box;
 }
 
-.perifeel-experto-caard h1 {
-    color: #333;
-    font-size: 1.8rem;
+/* Parte superior con el avatar y el nombre */
+.paerifeela-expertao-profile-top {
+    margin-bottom: 30px;
+}
+
+.paerifeela-expertao-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #7BE37B;
     margin-bottom: 20px;
-    font-weight: 600;
-    text-align: center;
 }
 
-.perifeel-experto-infoo p {
-    margin: 10px 0;
-    color: #555;
+.paerifeela-expertao-name {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.paerifeela-expertao-field {
     font-size: 1rem;
+    font-weight: 500;
+    color: #555;
+    margin-top: 8px;
+}
+
+/* Información del perfil */
+.paerifeela-expertao-profile-info {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 10px;
+    margin-bottom: 30px;
+    width: 100%;
     text-align: left;
 }
 
-.perifeel-experto-infoo strong {
-    color: #333;
-}
-
-.perifeel-experto-actiones {
+.paerifeela-expertao-info-item {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 8px;
+    padding: 10px 15px;
     display: flex;
     justify-content: space-between;
-    margin-top: 30px;
+    font-size: 0.95rem;
+    color: #333;
 }
 
-.perifeel-experto-actiones button {
-    background-color: #A4EDA4;
-    color: #333;
+.paerifeela-expertao-info-item strong {
+    color: #2c3e50;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+/* Botones de acción */
+.paerifeela-expertao-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.paerifeela-expertao-actions button {
+    background: #A4EDA4;
     border: none;
     border-radius: 8px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 0.95rem;
+    padding: 12px 20px;
+    font-size: 1rem;
     font-weight: 500;
+    color: #333;
+    cursor: pointer;
     transition: background-color 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
-.perifeel-experto-actiones button:hover {
+.paerifeela-expertao-actions button:hover {
     background-color: #7BE37B;
     color: #fff;
+}
+
+/* Ajustes responsive */
+@media (max-width: 600px) {
+    .paerifeela-expertao-profile-card {
+        padding: 20px;
+    }
+
+    .paerifeela-expertao-name {
+        font-size: 1.5rem;
+    }
+
+    .paerifeela-expertao-info-item {
+        font-size: 0.9rem;
+    }
 }

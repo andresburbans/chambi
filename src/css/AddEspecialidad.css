@@ -14,14 +14,14 @@ body {
     box-sizing: inherit;
 }
 
-.add-especialidad-container {
+.aadde-especialidaad-container {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 20px;
 }
 
-.add-especialidad-card {
+.aadde-especialidaad-caard {
     background-color: #FFFFFF;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
@@ -33,7 +33,7 @@ body {
     box-sizing: border-box;
 }
 
-.add-especialidad-card h1 {
+.aadde-especialidaad-caard h1 {
     color: #333;
     font-size: 1.5rem;
     margin-bottom: 20px;
@@ -41,21 +41,21 @@ body {
     text-align: center;
 }
 
-.add-especialidad-form {
+.aadde-especialidaad-foorm {
     display: flex;
     flex-direction: column;
 }
 
-.add-especialidad-form label {
+.aadde-especialidaad-foorm label {
     margin-bottom: 5px;
     color: #555;
     font-weight: 500;
     font-size: 0.95rem;
 }
 
-.add-especialidad-form input,
-.add-especialidad-form select,
-.add-especialidad-form textarea {
+.aadde-especialidaad-foorm input,
+.aadde-especialidaad-foorm select,
+.aadde-especialidaad-foorm textarea {
     margin-bottom: 15px;
     padding: 10px;
     border: 1px solid #C2E3C2;
@@ -68,14 +68,14 @@ body {
     box-sizing: border-box;
 }
 
-.add-especialidad-form input:focus,
-.add-especialidad-form select:focus,
-.add-especialidad-form textarea:focus {
+.aadde-especialidaad-foorm input:focus,
+.aadde-especialidaad-foorm select:focus,
+.aadde-especialidaad-foorm textarea:focus {
     outline: none;
     border: 1px solid #7BE37B;
 }
 
-.add-especialidad-form button {
+.aadde-especialidaad-foorm button {
     background-color: #A4EDA4;
     color: #333;
     border: none;
@@ -88,12 +88,12 @@ body {
     margin-top: 10px;
 }
 
-.add-especialidad-form button:hover {
+.aadde-especialidaad-foorm button:hover {
     background-color: #7BE37B;
     color: #fff;
 }
 
-.error-message {
+.eerroor-message {
     color: red;
     margin-bottom: 10px;
     font-size: 0.9rem;

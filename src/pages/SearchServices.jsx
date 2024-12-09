@@ -7,8 +7,8 @@ import "../css/SearchServices.css";
 
 const SearchServices = () => {
     const [locations, setLocations] = useState([]);
-    const [categories, setCategories] = useState([]);       // Para servicios
-    const [specialtiesData, setSpecialtiesData] = useState([]); // Para especialistas
+    const [categories, setCategories] = useState([]);       // Para servicios (type: "specific")
+    const [specialtiesData, setSpecialtiesData] = useState([]); // Para especialistas (type: "expert")
     const [subcategories, setSubcategories] = useState([]);
     const [services, setServices] = useState([]);
 
@@ -66,7 +66,6 @@ const SearchServices = () => {
     }, []);
 
     useEffect(() => {
-        // Una vez cargue la pagina, pedir ubicación si no se ha pedido
         if (!locationRequested) {
             alert("Chambi necesita conocer tu ubicación para funcionar correctamente :D");
             obtenerUbicacion();
@@ -84,7 +83,7 @@ const SearchServices = () => {
                 },
                 (error) => {
                     console.error("Error al obtener la ubicación:", error);
-                    setLocationError("No se pudo obtener tu ubicación. Asegúrate de que los servicios de ubicación estén habilitados.");
+                    setLocationError("No se pudo obtener tu ubicación. Asegúrate de que los servicios estén habilitados.");
                 }
             );
         } else {
@@ -103,11 +102,9 @@ const SearchServices = () => {
         setSelectedCategory(value);
 
         if (selectedType === "service") {
-            // Buscar subcategorías en categories
             const selectedCat = categories.find(cat => cat.name === value);
             setSubcategories(selectedCat ? selectedCat.subcategories : []);
         } else {
-            // Buscar subcategorías en specialties
             const selectedField = specialtiesData.find(field => field.field === value);
             setSubcategories(selectedField ? selectedField.subcategories : []);
         }
@@ -138,7 +135,6 @@ const SearchServices = () => {
     const handleSearch = () => {
         const priceToCompare = getPrice();
 
-        // Filtrado inicial
         let filtered = [...services];
 
         // Filtrar por comuna
@@ -146,11 +142,10 @@ const SearchServices = () => {
             filtered = filtered.filter(svc => svc.nearestLocation === selectedComuna);
         }
 
-        // Filtrar por tipo (service / specialty)
+        // Filtrar por tipo
         if (selectedType === "service") {
             filtered = filtered.filter(svc => svc.type === "specific");
         } else {
-            // Buscar un especialista
             filtered = filtered.filter(svc => svc.type === "expert");
         }
 
@@ -175,13 +170,10 @@ const SearchServices = () => {
             } else {
                 const priceVal = parseInt(priceToCompare);
                 if (priceVal === 100000) {
-                    // Menos de 100000
                     filtered = filtered.filter(svc => svc.price.value <= 100000);
                 } else if (priceVal === 300000) {
-                    // entre 100000 y 300000
                     filtered = filtered.filter(svc => svc.price.value >= 100000 && svc.price.value <= 300000);
                 } else if (priceVal === 300001) {
-                    // más de 300000
                     filtered = filtered.filter(svc => svc.price.value > 300000);
                 }
             }
@@ -206,6 +198,30 @@ const SearchServices = () => {
         setSelectedService(null);
     };
 
+    // Función para obtener el nombre de la subcategoría a partir del ID
+    const getSubcategoryName = (service) => {
+        // Si es un servicio (type: "specific"), buscar en categories
+        if (service.type === "specific") {
+            const cat = categories.find(c => c.name === service.categoryId);
+            if (cat && cat.subcategories) {
+                const sub = cat.subcategories.find(s => s.id === service.subcategoryId);
+                return sub ? sub.name : service.subcategoryId;
+            }
+            return service.subcategoryId;
+        } else {
+            // Es un especialista (type: "expert"), buscar en specialties
+            // Asumiendo que service.specialty o service.subcategoryId es un ID similar
+            // Si ya tienes el ID en subcategoryId, úsalo. Si guardas el nombre directamente en specialty, adáptalo.
+            // Aquí asumo que specialty guarda un ID (ej: "1.1") y necesitamos el nombre.
+            const fieldData = specialtiesData.find(f => f.field === service.field);
+            if (fieldData && fieldData.subcategories) {
+                const sub = fieldData.subcategories.find(s => s.id === service.specialty);
+                return sub ? sub.name : service.specialty;
+            }
+            return service.specialty;
+        }
+    };
+
     const renderResults = () => {
         if (results.length === 0) {
             return (
@@ -217,11 +233,13 @@ const SearchServices = () => {
         }
 
         return results.map((result) => {
-            // Mostrar datos breves en la tarjeta
             let title = result.name;
             let price = result.price.value;
             let ratingVal = result.rating;
             let desc = result.description.slice(0, 100) + "...";
+            const distanceText = (result.distance !== undefined)
+                ? `Distancia: a menos de ${Math.round(result.distance * 10) / 10} km del que consulta`
+                : "";
 
             return (
                 <div
@@ -233,6 +251,7 @@ const SearchServices = () => {
                     <p>Precio: ${price}</p>
                     <p>Calificación: {ratingVal.toFixed(1)} ⭐</p>
                     <p>{desc}</p>
+                    {distanceText && <p>{distanceText}</p>}
                 </div>
             );
         });
@@ -246,6 +265,16 @@ const SearchServices = () => {
         const licenseDigits = svc.professionalLicense ? svc.professionalLicense.slice(0, 4) : "No verificado";
         const whatsappLink = `https://wa.me/57${svc.phoneNumber}`;
         const fullDesc = svc.description;
+        const mapsLink = `https://www.google.com/maps/dir/?api=1&destination=${svc.coordinates.latitude},${svc.coordinates.longitude}`;
+
+        // Obtener el nombre de la subcategoría/especialidad
+        let subcategoryName = "";
+        if (svc.type === "specific") {
+            subcategoryName = getSubcategoryName(svc);
+        } else {
+            // para expertos
+            subcategoryName = getSubcategoryName(svc);
+        }
 
         return (
             <div className="details">
@@ -256,19 +285,21 @@ const SearchServices = () => {
                 <p><strong>Contacto:</strong> <a href={whatsappLink} target="_blank" rel="noopener noreferrer">{svc.phoneNumber}</a></p>
                 <p><strong>Documento (4 dígitos):</strong> {docDigits}</p>
                 <p><strong>Matrícula Profesional (4 dígitos):</strong> {licenseDigits}</p>
-                {selectedType === "service" ? (
+
+                {svc.type === "specific" ? (
                     <>
                         <p><strong>Categoría:</strong> {svc.categoryId}</p>
-                        <p><strong>Subcategoría:</strong> {svc.subcategoryId}</p>
+                        <p><strong>Subcategoría:</strong> {subcategoryName}</p>
                     </>
                 ) : (
                     <>
                         <p><strong>Campo:</strong> {svc.field}</p>
-                        <p><strong>Especialidad:</strong> {svc.specialty}</p>
+                        <p><strong>Especialidad:</strong> {subcategoryName}</p>
                     </>
                 )}
+
                 <p><strong>Ubicación Aproximada:</strong> {svc.nearestLocation}</p>
-                <p><em>Puedes usar el ícono de navegación en un futuro</em></p>
+                <p><strong>Como llegar:</strong> <a href={mapsLink} target="_blank" rel="noopener noreferrer">Navega aquí</a></p>
             </div>
         );
     };
@@ -304,9 +335,11 @@ const SearchServices = () => {
                                     </option>
                                 ))}
                             </select>
+                            {/* Aquí seguimos usando el ID en el filtrado, pero en la presentación se buscará el nombre. */}
                             <select onChange={(e) => setSelectedSubcategory(e.target.value)}>
                                 <option value="">Selecciona una subcategoría</option>
                                 {subcategories.map((sub, index) => (
+                                    // Mantenemos el id como value, para no alterar la lógica de filtros
                                     <option key={index} value={sub.id}>
                                         {sub.name}
                                     </option>
@@ -326,7 +359,7 @@ const SearchServices = () => {
                             <select onChange={(e) => setSelectedSubcategory(e.target.value)}>
                                 <option value="">Selecciona una especialidad</option>
                                 {subcategories.map((sub, index) => (
-                                    <option key={index} value={sub.name}>
+                                    <option key={index} value={sub.id}>
                                         {sub.name}
                                     </option>
                                 ))}
