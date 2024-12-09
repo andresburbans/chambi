@@ -15,7 +15,7 @@ const Header = () => {
             </div>
             <div className="header-center">
                 <a href="/">Inicio</a>
-                <a href="/servicios">Servicios</a>
+                <a href="/search">Buscar Servicios</a>
             </div>
             <div className="header-right">
                 <div className="perfil-container" onClick={togglePerfilMenu}>

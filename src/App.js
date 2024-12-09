@@ -9,7 +9,7 @@ import PerfilCliente from './pages/PerfilCliente';
 import PerfilExperto from './pages/PerfilExperto';
 import AddEspecialidad from './pages/AddEspecialidad';
 import AddServicio from './pages/AddServicio';
-
+import About from './pages/About';
 // Importa los componentes Header y Footer si los vas a usar
 //import Header from './components/Header';
 //import Footer from './components/Footer';
@@ -23,6 +23,9 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/search" element={<SearchServices />} />
+
+        {/* Ruta segura para produccion producción */}
+        <Route path="/nosotros" element={<About />} />
 
         {/* Rutas para pruebas (sin protección) - Elimina estas en producción */}
         <Route path="/add-servicio" element={<AddServicio />} />

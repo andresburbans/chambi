@@ -1,18 +1,129 @@
-.about {
-    font-family: Arial, sans-serif;
-    background-color: white;
-    padding: 20px;
-}
+/* about.css - Estilo minimalista, pastel y coherente con el resto del diseño */
 
-.header {
-    margin-bottom: 20px;
-}
-
-.header h1 {
-    font-size: 2.5rem;
+/* Ajustes globales */
+html,
+body {
     margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #E8F9E8;
+    /* Fondo pastel muy claro */
+    color: #333;
+    box-sizing: border-box;
 }
 
-.main {
-    text-align: justify;
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+.about-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main.about-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 40px 20px;
+    flex: 1;
+    /* Hace que el main ocupe el espacio disponible antes del footer */
+}
+
+/* Secciones con fondo blanco en forma de "tarjeta" */
+.about-section {
+    background: #FFFFFF;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
+    padding: 30px;
+    margin-bottom: 40px;
+}
+
+/* Títulos */
+.about-section h1,
+.about-section h2 {
+    color: #2c3e50;
+    margin: 0 0 20px 0;
+    font-weight: 600;
+}
+
+.about-section h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.about-section h2 {
+    font-size: 1.5rem;
+    border-bottom: 2px solid #7BE37B;
+    /* línea sutil con el color principal */
+    padding-bottom: 10px;
+}
+
+/* Texto */
+.about-section p,
+.about-section li {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    color: #555;
+}
+
+/* Estilos para listas */
+.about-section ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 20px 0;
+}
+
+.about-section ul li {
+    position: relative;
+    padding-left: 25px;
+}
+
+.about-section ul li::before {
+    content: '•';
+    color: #7BE37B;
+    /* Punto con el color principal */
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+    top: 0;
+    line-height: 1;
+    margin-top: 4px;
+}
+
+/* Enlaces */
+a {
+    color: #7BE37B;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+    main.about-container {
+        padding: 20px 10px;
+    }
+
+    .about-section h1 {
+        font-size: 1.5rem;
+    }
+
+    .about-section h2 {
+        font-size: 1.25rem;
+    }
+
+    .about-section p,
+    .about-section li {
+        font-size: 0.95rem;
+    }
 }
