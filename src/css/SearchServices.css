@@ -3,6 +3,8 @@
     flex-direction: column;
     padding: 20px;
     font-family: Arial, sans-serif;
+    background-color: #E8F9E8;
+    /* Fondo suave para mayor integración visual */
 }
 
 .filters {
@@ -19,6 +21,33 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     width: auto;
+    transition: border 0.3s ease, background-color 0.3s ease;
+    font-size: 0.95rem;
+    background-color: #F8FCF8;
+}
+
+.filters select:hover,
+.filters button:hover,
+.filters input[type="number"]:hover {
+    background-color: #eef7ee;
+}
+
+.filters select:focus,
+.filters input[type="number"]:focus {
+    outline: none;
+    border: 1px solid #7BE37B;
+    background-color: #ffffff;
+}
+
+.filters button {
+    background-color: #A4EDA4;
+    color: #333;
+    cursor: pointer;
+}
+
+.filters button:hover {
+    background-color: #7BE37B;
+    color: #fff;
 }
 
 .content {
@@ -44,11 +73,12 @@
     cursor: pointer;
     background: #fff;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
     background: #f0fff0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .card.no-results {
@@ -65,15 +95,26 @@
 /* Detalles a la derecha */
 .details {
     width: 50%;
-    padding-left: 10px;
+    padding: 20px 10px 20px 20px;
     background: #ffffff;
     border-left: 1px solid #ddd;
     border-radius: 0 5px 5px 0;
     overflow-y: auto;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.03);
+    line-height: 1.5;
 }
 
 .details h2 {
     margin-top: 0;
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.details p {
+    margin-bottom: 10px;
+    color: #555;
+    font-size: 0.95rem;
 }
 
 .details strong {
@@ -83,6 +124,8 @@
 .details a {
     color: #007bff;
     text-decoration: none;
+    word-break: break-all;
+    /* Por si el enlace es muy largo */
 }
 
 .details a:hover {

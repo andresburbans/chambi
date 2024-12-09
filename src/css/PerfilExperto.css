@@ -14,7 +14,7 @@ body {
     box-sizing: inherit;
 }
 
-.perfil-experto-container {
+.perifeel-experto-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -23,19 +23,19 @@ body {
     padding: 20px;
 }
 
-.perfil-experto-card {
+.perifeel-experto-caard {
     background-color: #FFFFFF;
     border-radius: 12px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
     padding: 20px 30px;
     max-width: 500px;
     width: 100%;
-    text-align: left;
+    text-align: center;
     border: 1px solid #CCF0CC;
     box-sizing: border-box;
 }
 
-.perfil-experto-card h1 {
+.perifeel-experto-caard h1 {
     color: #333;
     font-size: 1.8rem;
     margin-bottom: 20px;
@@ -43,12 +43,36 @@ body {
     text-align: center;
 }
 
-.perfil-experto-info p {
+.perifeel-experto-infoo p {
     margin: 10px 0;
     color: #555;
     font-size: 1rem;
+    text-align: left;
 }
 
-.perfil-experto-info strong {
+.perifeel-experto-infoo strong {
     color: #333;
+}
+
+.perifeel-experto-actiones {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+}
+
+.perifeel-experto-actiones button {
+    background-color: #A4EDA4;
+    color: #333;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+}
+
+.perifeel-experto-actiones button:hover {
+    background-color: #7BE37B;
+    color: #fff;
 }

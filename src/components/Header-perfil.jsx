@@ -1,29 +1,32 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import '../css/Header-perfil.css';
+import '../css/Header.css';
 
 const Header = () => {
-    const [showMenu, setShowMenu] = useState(false);
+    const [showPerfilMenu, setShowPerfilMenu] = useState(false);
 
-    const toggleMenu = () => {
-        setShowMenu(!showMenu);
+    const togglePerfilMenu = () => {
+        setShowPerfilMenu(!showPerfilMenu);
     };
 
     return (
         <header className="header-container">
             <div className="header-left">
-                <Link to="/">Chambi</Link>
+                <a href="/">Chambi</a>
+            </div>
+            <div className="header-center">
+                <a href="/">Inicio</a>
+                <a href="/servicios">Servicios</a>
             </div>
             <div className="header-right">
-                <div className="user-profile" onClick={toggleMenu}>
-                    Perfil de Usuario
+                <div className="perfil-container" onClick={togglePerfilMenu}>
+                    Perfil
+                    {showPerfilMenu && (
+                        <div className="perfil-dropdown">
+                            <a href="/perfil-cliente">Perfil de Usuario</a>
+                            <a href="/perfil-experto">Perfil de Experto</a>
+                        </div>
+                    )}
                 </div>
-                {showMenu && (
-                    <div className="dropdown-menu">
-                        <Link to="/perfil-cliente">Perfil Cliente</Link>
-                        <Link to="/perfil-experto">Perfil Experto</Link>
-                    </div>
-                )}
             </div>
         </header>
     );

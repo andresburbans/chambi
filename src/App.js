@@ -8,7 +8,7 @@ import SearchServices from './pages/SearchServices';
 import PerfilCliente from './pages/PerfilCliente';
 import PerfilExperto from './pages/PerfilExperto';
 import AddEspecialidad from './pages/AddEspecialidad';
-import AddEService from './pages/AddEService ';
+import AddServicio from './pages/AddServicio';
 
 // Importa los componentes Header y Footer si los vas a usar
 //import Header from './components/Header';
@@ -25,8 +25,8 @@ function App() {
         <Route path="/search" element={<SearchServices />} />
 
         {/* Rutas para pruebas (sin protección) - Elimina estas en producción */}
-        <Route path="/add-servicio" element={<AddEService />} />
-        <Route path="/edd-especialidad" element={<AddEspecialidad />} />
+        <Route path="/add-servicio" element={<AddServicio />} />
+        <Route path="/add-especialidad" element={<AddEspecialidad />} />
 
         {/* Rutas para pruebas (sin protección) - Elimina estas en producción */}
         <Route path="/perfil-cliente" element={<PerfilCliente />} />

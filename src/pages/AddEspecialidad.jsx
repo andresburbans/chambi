@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { db } from "../firebaseConfig";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import Header from '../components/Header';
+import Header from '../components/Header-perfil';
 import Footer from '../components/Footer';
 import '../css/AddEspecialidad.css';
+import '../css/Header-perfil.css';
 
 const AddEspecialidad = () => {
     const [specialtiesData, setSpecialtiesData] = useState([]);
@@ -55,7 +56,7 @@ const AddEspecialidad = () => {
                     const { latitude, longitude } = position.coords;
                     setUserCoordinates({ latitude, longitude });
                     const nearest = calcularNearest(latitude, longitude, locations);
-                    setNearestLocation(nearest ? nearest.id : null);
+                    setNearestLocation(nearest ? nearest.name : null);
                 },
                 (error) => {
                     console.error("Error al obtener la ubicación:", error);
@@ -126,12 +127,12 @@ const AddEspecialidad = () => {
             specialty: selectedSpecialty,
             description: finalDescription,
             price: { value: finalPrice, currency: "COP" },
-            rating: 1.0,
+            rating: 5,
             phoneNumber: phoneNumber || "3000000000",
             documentNumber: "00000000",
             professionalLicense: professionalLicense || null,
             coordinates: { latitude: userCoordinates.latitude, longitude: userCoordinates.longitude },
-            nearestLocation: nearestLocation || "CN01",
+            nearestLocation: nearestLocation || "Comuna 1",
             photoUrl: photoUrl || null,
         };
 

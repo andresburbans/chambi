@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { db } from "../firebaseConfig";
 import { collection, addDoc, getDocs } from "firebase/firestore";
-import Header from '../components/Header';
+import HeaderPerfil from '../components/Header-perfil';
 import Footer from '../components/Footer';
 import '../css/AddServicio.css';
+import '../css/Header-perfil.css';
 
 const AddServicio = () => {
     const [categories, setCategories] = useState([]);
@@ -55,7 +56,8 @@ const AddServicio = () => {
                     const { latitude, longitude } = position.coords;
                     setUserCoordinates({ latitude, longitude });
                     const nearest = calcularNearest(latitude, longitude, locations);
-                    setNearestLocation(nearest ? nearest.id : null);
+                    // Guardamos nearestLocation usando el nombre (nearest.name) para que coincida con los filtros en SearchServices
+                    setNearestLocation(nearest ? nearest.name : null);
                 },
                 (error) => {
                     console.error("Error al obtener la ubicación:", error);
@@ -109,7 +111,8 @@ const AddServicio = () => {
             return;
         }
 
-        const finalDescription = description.trim() !== "" ? description : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod, risus quis venenatis pharetra, lorem quam volutpat diam, a condimentum ante velit eu justo. Fusce vitae purus aliquet, tincidunt ligula at, auctor nulla. Vivamus dictum, sapien in varius efficitur, ex eros facilisis elit, a ullamcorper est nibh at sem.";
+        const finalDescription = description.trim() !== "" ? description :
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam euismod, risus quis venenatis pharetra, lorem quam volutpat diam, a condimentum ante velit eu justo. Fusce vitae purus aliquet, tincidunt ligula at, auctor nulla. Vivamus dictum, sapien in varius efficitur, ex eros facilisis elit, a ullamcorper est nibh at sem.";
 
         const finalName = selectedSubcategory; // El nombre del servicio será la subcategoría.
         const finalPrice = parseFloat(price) || 0.0;
@@ -126,18 +129,27 @@ const AddServicio = () => {
             subcategoryId: selectedSubcategory,
             description: finalDescription,
             price: { value: finalPrice, currency: "COP" },
-            rating: 1.0,
+            rating: 5,
             phoneNumber: phoneNumber || "3000000000",
             documentNumber: "00000000",
             professionalLicense: professionalLicense || null,
             coordinates: { latitude: userCoordinates.latitude, longitude: userCoordinates.longitude },
-            nearestLocation: nearestLocation || "CN01",
+            nearestLocation: nearestLocation || "Comuna 1", // Valor por defecto si no encuentra
             photoUrl: photoUrl || null,
         };
 
         try {
             await addDoc(collection(db, "services"), newService);
             alert("Servicio agregado con éxito!");
+
+            // Limpiar el formulario para agregar otro servicio
+            setSelectedCategory("");
+            setSelectedSubcategory("");
+            setPrice("");
+            setPhoneNumber("");
+            setProfessionalLicense("");
+            setDescription("");
+            setPhotoUrl("");
         } catch (error) {
             console.error("Error al agregar servicio:", error);
             alert("Hubo un error al agregar el servicio.");
@@ -146,14 +158,14 @@ const AddServicio = () => {
 
     return (
         <>
-            <Header />
+            <HeaderPerfil />
             <div className="add-servicio-container">
                 {locationError && <div className="error-message">{locationError}</div>}
                 <div className="add-servicio-card">
                     <h1>Agregar un Servicio</h1>
                     <form onSubmit={handleSubmit} className="add-servicio-form">
                         <label>Categoría</label>
-                        <select onChange={(e) => handleCategoryChange(e.target.value)}>
+                        <select value={selectedCategory} onChange={(e) => handleCategoryChange(e.target.value)}>
                             <option value="">Selecciona una categoría</option>
                             {categories.map((cat, index) => (
                                 <option key={index} value={cat.name}>
@@ -163,7 +175,7 @@ const AddServicio = () => {
                         </select>
 
                         <label>Subcategoría</label>
-                        <select onChange={(e) => setSelectedSubcategory(e.target.value)}>
+                        <select value={selectedSubcategory} onChange={(e) => setSelectedSubcategory(e.target.value)}>
                             <option value="">Selecciona una subcategoría</option>
                             {subcategories.map((sub, index) => (
                                 <option key={index} value={sub.id}>
@@ -173,19 +185,44 @@ const AddServicio = () => {
                         </select>
 
                         <label>Precio (COP)</label>
-                        <input type="number" min="0" value={price} onChange={(e) => setPrice(e.target.value)} placeholder="Ej: 100000" />
+                        <input
+                            type="number"
+                            min="0"
+                            value={price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            placeholder="Ej: 100000"
+                        />
 
                         <label>Teléfono de Contacto</label>
-                        <input type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} placeholder="3000000000" />
+                        <input
+                            type="tel"
+                            value={phoneNumber}
+                            onChange={(e) => setPhoneNumber(e.target.value)}
+                            placeholder="3000000000"
+                        />
 
                         <label>Matrícula Profesional (opcional)</label>
-                        <input type="text" value={professionalLicense} onChange={(e) => setProfessionalLicense(e.target.value)} placeholder="ABC1234" />
+                        <input
+                            type="text"
+                            value={professionalLicense}
+                            onChange={(e) => setProfessionalLicense(e.target.value)}
+                            placeholder="ABC1234"
+                        />
 
                         <label>Descripción (opcional)</label>
-                        <textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Si no se coloca, se pone un lorem ipsum por defecto..."></textarea>
+                        <textarea
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder="Si no se coloca, se pone un lorem ipsum por defecto..."
+                        ></textarea>
 
                         <label>Foto (opcional, URL)</label>
-                        <input type="text" value={photoUrl} onChange={(e) => setPhotoUrl(e.target.value)} placeholder="http://..." />
+                        <input
+                            type="text"
+                            value={photoUrl}
+                            onChange={(e) => setPhotoUrl(e.target.value)}
+                            placeholder="http://..."
+                        />
 
                         <button type="submit">Agregar Servicio</button>
                     </form>

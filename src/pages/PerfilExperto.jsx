@@ -1,5 +1,5 @@
 import React from 'react';
-import '../css/PerfilExperto.css';
+import '../css/PerfilExperto.css'; // Asegúrate que este archivo existe y tiene las clases renombradas
 import { useNavigate } from 'react-router-dom';
 
 const PerfilExperto = () => {
@@ -29,10 +29,10 @@ const PerfilExperto = () => {
     };
 
     return (
-        <div className="perfil-experto-container">
-            <div className="perfil-experto-card">
+        <div className="perifeel-experto-container">
+            <div className="perifeel-experto-caard">
                 <h1>Perfil del Experto</h1>
-                <div className="perfil-experto-info">
+                <div className="perifeel-experto-infoo">
                     <p><strong>Nombre:</strong> {expertData.firstName} {expertData.lastName}</p>
                     <p><strong>Correo:</strong> {expertData.email}</p>
                     <p><strong>Tipo de Documento:</strong> {expertData.documentType}</p>
@@ -44,7 +44,7 @@ const PerfilExperto = () => {
                     <p><strong>Ubicación Aproximada:</strong> {expertData.coordinates.latitude}, {expertData.coordinates.longitude}</p>
                     <p><strong>Comuna Cercana:</strong> {expertData.nearestLocation}</p>
                 </div>
-                <div className="perfil-experto-actions">
+                <div className="perifeel-experto-actiones">
                     <button onClick={handleAddServicio}>Agregar un Servicio</button>
                     <button onClick={handleAddEspecialidad}>Agregar una Especialidad</button>
                 </div>
