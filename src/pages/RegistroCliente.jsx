@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { doc, updateDoc, getDoc, onSnapshot, setDoc, collection, getDocs, serverTimestamp } from "firebase/firestore";
+import { doc, updateDoc, onSnapshot, setDoc, collection, getDocs, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "../firebaseConfig";
+
 import '../css/RegistroCliente.css';
 
 const RegistroClientes = () => {
@@ -10,28 +11,34 @@ const RegistroClientes = () => {
     const { state } = location;
 
     const [formData, setFormData] = useState({
-        nombre: '',
-        apellido: '',
-        tipoDocumento: '',
-        numeroDocumento: '',
+        firstName: '',
+        lastName: '',
+        documentType: '',
+        documentNumber: '',
         email: state?.email || '',
         phoneNumber: '',
         coordinates: { latitude: null, longitude: null },
         nearestLocation: null,
-        createdAt: null
+        createdAt: null,
+        type: 'cliente'
     });
+
     const [locations, setLocations] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [locationError, setLocationError] = useState(null);
+    const [locationRequested, setLocationRequested] = useState(false);
 
     useEffect(() => {
         const fetchLocations = async () => {
             try {
                 const locationsSnapshot = await getDocs(collection(db, "locations"));
-                setLocations(locationsSnapshot.docs.map(doc => doc.data()));
+                const locData = locationsSnapshot.docs.map(doc => doc.data());
+                setLocations(locData);
             } catch (error) {
-                console.error("Error al obtener los campos:", error);
+                console.error("Error al obtener las ubicaciones:", error);
             }
         };
+
         fetchLocations();
 
         const user = auth.currentUser;
@@ -42,15 +49,16 @@ const RegistroClientes = () => {
                 if (docSnap.exists()) {
                     const userData = docSnap.data();
                     setFormData({
-                        nombre: userData.firstName || '',
-                        apellido: userData.lastName || '',
+                        firstName: userData.firstName || '',
+                        lastName: userData.lastName || '',
                         email: userData.email || state?.email || '',
-                        tipoDocumento: userData.documentType || '',
-                        numeroDocumento: userData.documentNumber || '',
+                        documentType: userData.documentType || '',
+                        documentNumber: userData.documentNumber || '',
                         phoneNumber: userData.phoneNumber || '',
                         coordinates: userData.coordinates || { latitude: null, longitude: null },
                         nearestLocation: userData.nearestLocation || null,
-                        createdAt: userData.createdAt || null
+                        createdAt: userData.createdAt || null,
+                        type: userData.type || 'cliente'
                     });
                 }
                 setLoading(false);
@@ -62,37 +70,54 @@ const RegistroClientes = () => {
         }
     }, [navigate, state?.email]);
 
+    useEffect(() => {
+        // Una vez que se haya cargado todo (loading = false) y no se haya solicitado ubicación
+        if (!loading && !locationRequested) {
+            alert("Chambi necesita conocer tu ubicación para funcionar correctamente :D");
+            obtenerUbicacion();
+            setLocationRequested(true);
+        }
+    }, [loading, locationRequested]);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
 
     const obtenerUbicacion = () => {
+        setLocationError(null);
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    setFormData({ ...formData, coordinates: { latitude, longitude } });
 
-                    const nearest = locations.reduce((prev, curr) => {
-                        const prevDist = calcularDistancia(latitude, longitude, prev.latitude, prev.longitude)
-                        const currDist = calcularDistancia(latitude, longitude, curr.latitude, curr.longitude)
-                        return prevDist < currDist ? prev : curr;
-                    })
-                    setFormData({ ...formData, nearestLocation: nearest.name });
+                    let nearestName = null;
+                    if (locations.length > 0) {
+                        const nearest = locations.reduce((prev, curr) => {
+                            const prevDist = calcularDistancia(latitude, longitude, prev.latitude, prev.longitude);
+                            const currDist = calcularDistancia(latitude, longitude, curr.latitude, curr.longitude);
+                            return prevDist < currDist ? prev : curr;
+                        });
+                        nearestName = nearest.name;
+                    }
 
+                    setFormData((prevData) => ({
+                        ...prevData,
+                        coordinates: { latitude, longitude },
+                        nearestLocation: nearestName
+                    }));
                 },
                 (error) => {
                     console.error("Error al obtener la ubicación:", error);
-
+                    setLocationError("No se pudo obtener tu ubicación. Asegúrate de que los servicios de ubicación estén habilitados.");
                 }
             );
-
         } else {
             console.error("Geolocalización no soportada por el navegador.");
-
+            setLocationError("Tu navegador no soporta la geolocalización.");
         }
-    }
+    };
+
     function calcularDistancia(lat1, lon1, lat2, lon2) {
         const R = 6371;
         const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -117,7 +142,7 @@ const RegistroClientes = () => {
         }
 
         if (!formData.coordinates.latitude || !formData.coordinates.longitude) {
-            alert("Debes obtener tu ubicación antes de registrarte.");
+            alert("Debes permitir la ubicación antes de registrarte.");
             return;
         }
 
@@ -126,15 +151,12 @@ const RegistroClientes = () => {
 
         if (user) {
             try {
-
                 const userRef = doc(db, "users", user.uid);
-
                 await updateDoc(userRef, {
                     ...formData,
                     createdAt: timestamp
                 });
 
-                console.log('Datos del cliente actualizados:', formData);
                 alert('Registro de cliente completado!');
                 navigate("/");
             } catch (error) {
@@ -161,24 +183,26 @@ const RegistroClientes = () => {
     return (
         <div className="registro-cliente-container">
             <div className="registro-cliente-card">
+                {locationError && <div className="error-message">{locationError}</div>}
+
                 <h1>Completa tu registro</h1>
                 <form onSubmit={handleSubmit} className="registro-cliente-form">
-                    <label htmlFor="nombre">Nombre</label>
+                    <label htmlFor="firstName">Nombre</label>
                     <input
                         type="text"
-                        id="nombre"
-                        name="nombre"
-                        value={formData.nombre}
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
                         onChange={handleChange}
                         required
                     />
 
-                    <label htmlFor="apellido">Apellido</label>
+                    <label htmlFor="lastName">Apellido</label>
                     <input
                         type="text"
-                        id="apellido"
-                        name="apellido"
-                        value={formData.apellido}
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
                         onChange={handleChange}
                         required
                     />
@@ -193,11 +217,11 @@ const RegistroClientes = () => {
                         required
                     />
 
-                    <label htmlFor="tipoDocumento">Tipo de Documento</label>
+                    <label htmlFor="documentType">Tipo de Documento</label>
                     <select
-                        id="tipoDocumento"
-                        name="tipoDocumento"
-                        value={formData.tipoDocumento}
+                        id="documentType"
+                        name="documentType"
+                        value={formData.documentType}
                         onChange={handleChange}
                         required
                     >
@@ -208,12 +232,12 @@ const RegistroClientes = () => {
                         <option value="Otro">Otro</option>
                     </select>
 
-                    <label htmlFor="numeroDocumento">Número de Documento</label>
+                    <label htmlFor="documentNumber">Número de Documento</label>
                     <input
                         type="text"
-                        id="numeroDocumento"
-                        name="numeroDocumento"
-                        value={formData.numeroDocumento}
+                        id="documentNumber"
+                        name="documentNumber"
+                        value={formData.documentNumber}
                         onChange={handleChange}
                         required
                     />
@@ -230,9 +254,7 @@ const RegistroClientes = () => {
                         placeholder="10 dígitos"
                     />
 
-                    <button type="button" onClick={obtenerUbicacion}>Obtener Ubicación</button>
-
-                    <button type="submit">Registrarse</button>
+                    <button type="submit">Registrarme</button>
                 </form>
             </div>
         </div>

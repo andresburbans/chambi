@@ -1,5 +1,6 @@
 const admin = require("firebase-admin");
-const serviceAccount = require("../serviceAccountKey.json");
+const path = require('path');
+const serviceAccount = require(path.resolve('D:/PROYECTO-CHAMBI/PROD_CHAMBI/serviceAccountKey.json'));
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
@@ -9,65 +10,91 @@ const db = admin.firestore();
 
 const populateSpecialties = async () => {
     const specialties = [
-        // Especialidades de Ingeniería y Construcción
-        { name: "Ingeniería Civil", field: "Ingeniería y Construcción" },
-        { name: "Ingeniería Industrial", field: "Ingeniería y Construcción" },
-        { name: "Ingeniería de Sistemas", field: "Ingeniería y Construcción" },
-        { name: "Ingeniería Electrónica", field: "Ingeniería y Construcción" },
-        { name: "Ingeniería Ambiental", field: "Ingeniería y Construcción" },
-        { name: "Ingeniería Mecánica", field: "Ingeniería y Construcción" },
-        { name: "Ingeniería Eléctrica", field: "Ingeniería y Construcción" },
-        { name: "Ingeniería de Telecomunicaciones", field: "Ingeniería y Construcción" },
-        { name: "Ingeniería Agronómica", field: "Ingeniería y Construcción" },
-        { name: "Ingeniería de Petróleos", field: "Ingeniería y Construcción" },
-
-        // Especialidades de Salud y Cuidado Personal
-        { name: "Medicina General", field: "Salud y Cuidado Personal" },
-        { name: "Enfermería", field: "Salud y Cuidado Personal" },
-        { name: "Fisioterapia", field: "Salud y Cuidado Personal" },
-        { name: "Odontología", field: "Salud y Cuidado Personal" },
-        { name: "Psicología", field: "Salud y Cuidado Personal" },
-        { name: "Nutrición y Dietética", field: "Salud y Cuidado Personal" },
-        { name: "Terapia Ocupacional", field: "Salud y Cuidado Personal" },
-        { name: "Optometría", field: "Salud y Cuidado Personal" },
-        { name: "Medicina Veterinaria", field: "Salud y Cuidado Personal" },
-        { name: "Cosmetología", field: "Salud y Cuidado Personal" },
-
-        // Especialidades de Arquitectura y Diseño
-        { name: "Arquitectura", field: "Arquitectura y Diseño" },
-        { name: "Diseño de Interiores", field: "Arquitectura y Diseño" },
-        { name: "Diseño Gráfico", field: "Arquitectura y Diseño" },
-        { name: "Paisajismo", field: "Arquitectura y Diseño" },
-        { name: "Diseño Industrial", field: "Arquitectura y Diseño" },
-        { name: "Urbanismo", field: "Arquitectura y Diseño" },
-        { name: "Decoración de Eventos", field: "Arquitectura y Diseño" },
-        { name: "Diseño de Iluminación", field: "Arquitectura y Diseño" },
-        { name: "Restauración de Edificaciones", field: "Arquitectura y Diseño" },
-        { name: "Animación y Modelado 3D", field: "Arquitectura y Diseño" },
-
-        // Especialidades de Administración y Finanzas
-        { name: "Administración de Empresas", field: "Administración y Finanzas" },
-        { name: "Contaduría Pública", field: "Administración y Finanzas" },
-        { name: "Finanzas y Banca", field: "Administración y Finanzas" },
-        { name: "Mercadeo y Publicidad", field: "Administración y Finanzas" },
-        { name: "Recursos Humanos", field: "Administración y Finanzas" },
-        { name: "Logística y Supply Chain", field: "Administración y Finanzas" },
-        { name: "Comercio Internacional", field: "Administración y Finanzas" },
-        { name: "Economía", field: "Administración y Finanzas" },
-        { name: "Gestión de Proyectos", field: "Administración y Finanzas" },
-        { name: "Auditoría", field: "Administración y Finanzas" },
-
-        // Especialidades de Servicios Generales y Oficios Varios
-        { name: "Electricista", field: "Servicios Generales y Oficios Varios" },
-        { name: "Plomero", field: "Servicios Generales y Oficios Varios" },
-        { name: "Carpintero", field: "Servicios Generales y Oficios Varios" },
-        { name: "Albañil", field: "Servicios Generales y Oficios Varios" },
-        { name: "Jornalero Agrícola", field: "Servicios Generales y Oficios Varios" },
-        { name: "Jornalero de Obra", field: "Servicios Generales y Oficios Varios" },
-        { name: "Soldador", field: "Servicios Generales y Oficios Varios" },
-        { name: "Mecánico Automotriz", field: "Servicios Generales y Oficios Varios" },
-        { name: "Jardinería", field: "Servicios Generales y Oficios Varios" },
-        { name: "Operador de Maquinaria Pesada", field: "Servicios Generales y Oficios Varios" }
+        {
+            field: "Ingeniería y Construcción",
+            description: "Especialidades relacionadas con ingeniería.",
+            subcategories: [
+                // Especialidades de Ingeniería y Construcción
+                { id: "1.1", name: "Ingeniería Civil" },
+                { id: "1.2", name: "Ingeniería Industrial" },
+                { id: "1.3", name: "Ingeniería de Sistemas" },
+                { id: "1.4", name: "Ingeniería Electrónica" },
+                { id: "1.5", name: "Ingeniería Ambiental" },
+                { id: "1.6", name: "Ingeniería Mecánica" },
+                { id: "1.7", name: "Ingeniería Eléctrica" },
+                { id: "1.8", name: "Ingeniería de Telecomunicaciones" },
+                { id: "1.9", name: "Ingeniería Agronómica" },
+                { id: "1.10", name: "Ingeniería de Petróleos" },
+            ]
+        },
+        {
+            field: "Salud y Cuidado Personal",
+            description: "Especialidades relacionadas con la salud y el cuidado personal.",
+            subcategories: [
+                // Especialidades de Salud y Cuidado Personal
+                { id: "2.1", name: "Medicina General" },
+                { id: "2.2", name: "Enfermería" },
+                { id: "2.3", name: "Fisioterapia" },
+                { id: "2.4", name: "Odontología" },
+                { id: "2.5", name: "Psicología" },
+                { id: "2.6", name: "Nutrición y Dietética" },
+                { id: "2.7", name: "Terapia Ocupacional" },
+                { id: "2.8", name: "Optometría" },
+                { id: "2.9", name: "Medicina Veterinaria" },
+                { id: "2.10", name: "Cosmetología" },
+            ]
+        },
+        {
+            field: "Arquitectura y Diseño",
+            description: "Especialidades relacionadas con la arquitectura y el diseño.",
+            subcategories: [
+                // Especialidades de Arquitectura y Diseño
+                { id: "3.1", name: "Arquitectura" },
+                { id: "3.2", name: "Diseño de Interiores" },
+                { id: "3.3", name: "Diseño Gráfico" },
+                { id: "3.4", name: "Paisajismo" },
+                { id: "3.5", name: "Diseño Industrial" },
+                { id: "3.6", name: "Urbanismo" },
+                { id: "3.7", name: "Decoración de Eventos" },
+                { id: "3.8", name: "Diseño de Iluminación" },
+                { id: "3.9", name: "Restauración de Edificaciones" },
+                { id: "3.10", name: "Animación y Modelado 3D" },
+            ]
+        },
+        {
+            field: "Administración y Finanzas",
+            description: "Especialidades relacionadas con la administración y las finanzas.",
+            subcategories: [
+                // Especialidades de Administración y Finanzas
+                { id: "4.1", name: "Administración de Empresas" },
+                { id: "4.2", name: "Contaduría Pública" },
+                { id: "4.3", name: "Finanzas y Banca" },
+                { id: "4.4", name: "Mercadeo y Publicidad" },
+                { id: "4.5", name: "Recursos Humanos" },
+                { id: "4.6", name: "Logística y Supply Chain" },
+                { id: "4.7", name: "Comercio Internacional" },
+                { id: "4.8", name: "Economía" },
+                { id: "4.9", name: "Gestión de Proyectos" },
+                { id: "4.10", name: "Auditoría" },
+            ]
+        },
+        {
+            field: "Servicios Generales y Oficios Varios",
+            description: "Especialidades relacionadas con servicios generales y oficios varios.",
+            subcategories: [
+                // Especialidades de Servicios Generales y Oficios Varios
+                { id: "5.1", name: "Electricista" },
+                { id: "5.2", name: "Plomero" },
+                { id: "5.3", name: "Carpintero" },
+                { id: "5.4", name: "Albañil" },
+                { id: "5.5", name: "Jornalero Agrícola" },
+                { id: "5.6", name: "Jornalero de Obra" },
+                { id: "5.7", name: "Soldador" },
+                { id: "5.8", name: "Mecánico Automotriz" },
+                { id: "5.9", name: "Jardinería" },
+                { id: "5.10", name: "Operador de Maquinaria Pesada" },
+            ]
+        },
     ];
 
     const batch = db.batch();

@@ -52,26 +52,3 @@ body {
 .perfil-experto-info strong {
     color: #333;
 }
-
-.perfil-experto-actions {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 30px;
-}
-
-.perfil-experto-actions button {
-    background-color: #A4EDA4;
-    color: #333;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 20px;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 500;
-    transition: background-color 0.3s ease;
-}
-
-.perfil-experto-actions button:hover {
-    background-color: #7BE37B;
-    color: #fff;
-}

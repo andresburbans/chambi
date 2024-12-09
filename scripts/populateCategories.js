@@ -1,5 +1,7 @@
 const admin = require("firebase-admin");
-const serviceAccount = require("../serviceAccountKey.json");
+const path = require('path');
+const serviceAccount = require(path.resolve('D:/PROYECTO-CHAMBI/PROD_CHAMBI/serviceAccountKey.json'));
+
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
