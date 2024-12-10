@@ -4,7 +4,7 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import Header from '../components/Header-perfil';
 import Footer from '../components/Footer';
 import '../css/Header-perfil.css';
-import '../css/AddEspecialidad.css'; // Asegúrate de que aquí existe el archivo con las clases renombradas.
+import '../css/AddEspecialidad.css';
 
 const AddEspecialidad = () => {
     const [specialtiesData, setSpecialtiesData] = useState([]);
@@ -41,34 +41,35 @@ const AddEspecialidad = () => {
     }, []);
 
     useEffect(() => {
+        const obtenerUbicacion = () => {
+            setLocationError(null);
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        setUserCoordinates({ latitude, longitude });
+                        const nearest = calcularNearest(latitude, longitude, locations);
+                        setNearestLocation(nearest ? nearest.name : null);
+                    },
+                    (error) => {
+                        console.error("Error al obtener la ubicación:", error);
+                        setLocationError("No se pudo obtener tu ubicación. Asegúrate de que los servicios estén habilitados.");
+                    }
+                );
+            } else {
+                console.error("Geolocalización no soportada por el navegador.");
+                setLocationError("Tu navegador no soporta la geolocalización.");
+            }
+        };
+
         if (!locationRequested) {
             alert("Chambi necesita conocer tu ubicación para funcionar correctamente :D");
             obtenerUbicacion();
             setLocationRequested(true);
         }
-    }, [locationRequested]);
+    }, [locationRequested, locations]);
 
-    const obtenerUbicacion = () => {
-        setLocationError(null);
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    setUserCoordinates({ latitude, longitude });
-                    const nearest = calcularNearest(latitude, longitude, locations);
-                    setNearestLocation(nearest ? nearest.name : null);
-                },
-                (error) => {
-                    console.error("Error al obtener la ubicación:", error);
-                    setLocationError("No se pudo obtener tu ubicación. Asegúrate de que los servicios estén habilitados.");
-                }
-            );
-        } else {
-            console.error("Geolocalización no soportada por el navegador.");
-            setLocationError("Tu navegador no soporta la geolocalización.");
-        }
-    };
-
+    // eslint-disable-next-line
     const calcularDistancia = (lat1, lon1, lat2, lon2) => {
         const R = 6371;
         const dLat = (lat2 - lat1) * (Math.PI / 180);
@@ -82,7 +83,7 @@ const AddEspecialidad = () => {
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
     };
-
+    // eslint-disable-next-line
     const calcularNearest = (lat, lon, locs) => {
         if (!locs || locs.length === 0) return null;
         let nearest = locs[0];

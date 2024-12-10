@@ -41,34 +41,34 @@ const AddServicio = () => {
     }, []);
 
     useEffect(() => {
+        const obtenerUbicacion = () => {
+            setLocationError(null);
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        setUserCoordinates({ latitude, longitude });
+                        const nearest = calcularNearest(latitude, longitude, locations);
+                        // Guardamos nearestLocation usando el nombre (nearest.name) para que coincida con los filtros en SearchServices
+                        setNearestLocation(nearest ? nearest.name : null);
+                    },
+                    (error) => {
+                        console.error("Error al obtener la ubicación:", error);
+                        setLocationError("No se pudo obtener tu ubicación. Asegúrate de que los servicios estén habilitados.");
+                    }
+                );
+            } else {
+                console.error("Geolocalización no soportada por el navegador.");
+                setLocationError("Tu navegador no soporta la geolocalización.");
+            }
+        };
+
         if (!locationRequested) {
             alert("Chambi necesita conocer tu ubicación para funcionar correctamente :D");
             obtenerUbicacion();
             setLocationRequested(true);
         }
-    }, [locationRequested]);
-
-    const obtenerUbicacion = () => {
-        setLocationError(null);
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    setUserCoordinates({ latitude, longitude });
-                    const nearest = calcularNearest(latitude, longitude, locations);
-                    // Guardamos nearestLocation usando el nombre (nearest.name) para que coincida con los filtros en SearchServices
-                    setNearestLocation(nearest ? nearest.name : null);
-                },
-                (error) => {
-                    console.error("Error al obtener la ubicación:", error);
-                    setLocationError("No se pudo obtener tu ubicación. Asegúrate de que los servicios estén habilitados.");
-                }
-            );
-        } else {
-            console.error("Geolocalización no soportada por el navegador.");
-            setLocationError("Tu navegador no soporta la geolocalización.");
-        }
-    };
+    }, [locationRequested, locations]);
 
     const calcularDistancia = (lat1, lon1, lat2, lon2) => {
         const R = 6371;

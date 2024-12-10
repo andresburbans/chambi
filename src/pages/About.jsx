@@ -11,12 +11,16 @@ const About = () => {
             <Header />
             <main className="about-container">
                 <section className="about-section">
-                    <h1>Chambi: Conecta Clientes y Expertos Cercanos</h1>
+                    <h1>Conecta Clientes y Expertos Cercanos</h1>
                     <p>
                         <strong>Chambi</strong> es una plataforma de información geográfica que une a los habitantes de Cali, Colombia, con expertos en servicios profesionales a domicilio. A través de geolocalización precisa y una experiencia centrada en la confianza, <strong>Chambi</strong> simplifica la búsqueda de profesionales, fomenta la formalización laboral y agiliza el contacto entre clientes y expertos.
                     </p>
                     <p>
                         Inspirada en plataformas internacionales como TaskRabbit y Thumbtack, <strong>Chambi</strong> ofrece transparencia, seguridad y una interfaz intuitiva que optimiza la oferta y la demanda de servicios locales.
+                        <p> Puedes acceder atraves del siguiente vinculo: Hosting URL: https://chambi-pro.web.app
+
+                            <p>Actualmente la base de datos solo esta poblada para ejemplos con la comuna 1 y para la categoria de servicios, serivicos de "reparacion y mantenimiento" y "Reparacion de electrodomesticos"</p>
+                        </p>
                     </p>
                 </section>
 

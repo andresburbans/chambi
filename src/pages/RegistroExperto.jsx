@@ -94,13 +94,47 @@ const RegistroExpertos = () => {
     }, [formData.field, categories]);
 
     useEffect(() => {
+        const obtenerUbicacion = () => {
+            setLocationError(null);
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        let nearestName = null;
+
+                        if (locations.length > 0) {
+                            const nearest = locations.reduce((prev, curr) => {
+                                const prevDist = calcularDistancia(latitude, longitude, prev.latitude, prev.longitude);
+                                const currDist = calcularDistancia(latitude, longitude, curr.latitude, curr.longitude);
+                                return prevDist < currDist ? prev : curr;
+                            });
+                            nearestName = nearest.name;
+                        }
+
+                        setFormData((prevData) => ({
+                            ...prevData,
+                            coordinates: { latitude, longitude },
+                            nearestLocation: nearestName
+                        }));
+                    },
+                    (error) => {
+                        console.error("Error al obtener la ubicación:", error);
+                        setLocationError("No se pudo obtener tu ubicación. Asegúrate de que los servicios de ubicación estén habilitados.");
+                    }
+                );
+            } else {
+                console.error("Geolocalización no soportada por el navegador.");
+                setLocationError("Tu navegador no soporta la geolocalización.");
+            }
+        };
+
         // Una vez que haya cargado todo (loading = false) y no se haya solicitado ubicación, mostrar el alert y solicitar ubicación
         if (!loading && !locationRequested) {
             alert("Chambi necesita conocer tu ubicación para funcionar correctamente :D");
             obtenerUbicacion();
             setLocationRequested(true);
         }
-    }, [loading, locationRequested]);
+    }, [loading, locationRequested, locations]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -128,40 +162,6 @@ const RegistroExpertos = () => {
             Math.sin(dLon / 2);
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return R * c;
-    };
-
-    const obtenerUbicacion = () => {
-        setLocationError(null);
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(
-                (position) => {
-                    const { latitude, longitude } = position.coords;
-                    let nearestName = null;
-
-                    if (locations.length > 0) {
-                        const nearest = locations.reduce((prev, curr) => {
-                            const prevDist = calcularDistancia(latitude, longitude, prev.latitude, prev.longitude);
-                            const currDist = calcularDistancia(latitude, longitude, curr.latitude, curr.longitude);
-                            return prevDist < currDist ? prev : curr;
-                        });
-                        nearestName = nearest.name;
-                    }
-
-                    setFormData((prevData) => ({
-                        ...prevData,
-                        coordinates: { latitude, longitude },
-                        nearestLocation: nearestName
-                    }));
-                },
-                (error) => {
-                    console.error("Error al obtener la ubicación:", error);
-                    setLocationError("No se pudo obtener tu ubicación. Asegúrate de que los servicios de ubicación estén habilitados.");
-                }
-            );
-        } else {
-            console.error("Geolocalización no soportada por el navegador.");
-            setLocationError("Tu navegador no soporta la geolocalización.");
-        }
     };
 
     const handleSubmit = async () => {

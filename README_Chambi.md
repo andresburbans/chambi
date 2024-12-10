@@ -12,6 +12,14 @@ Actualmente, la búsqueda de expertos confiables en Cali está fragmentada en ca
 
 ---
 
+## Accede al test online
+
+Puedes acceder atraves del siguiente vinculo: Hosting URL: https://chambi-pro.web.app
+
+Actualmente la base de datos solo esta poblada para ejemplos con la comuna 1 y para la categoria de servicios, serivicos de "reparacion y mantenimiento" y "Reparacion de electrodomesticos"
+
+---
+
 ## Características Clave
 
 1. **Geolocalización Precisa**: Utiliza las coordenadas del cliente para mostrar opciones cercanas.
