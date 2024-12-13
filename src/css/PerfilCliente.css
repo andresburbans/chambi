@@ -4,7 +4,8 @@ body {
     padding: 0;
     height: 100%;
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-color: #E8F9E8;
+    background: linear-gradient(135deg, #E8F9E8 0%, #CFF3CF 100%);
+    color: #333;
     box-sizing: border-box;
 }
 
@@ -14,41 +15,75 @@ body {
     box-sizing: inherit;
 }
 
-.perfil-experto-container {
+.paerifleel-clientee-containera {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    overflow: hidden;
-    padding: 20px;
+    min-height: 100vh;
+    padding: 40px 20px;
 }
 
-.perfil-experto-card {
-    background-color: #FFFFFF;
-    border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.06);
-    padding: 20px 30px;
+.paerifleel-clientee-caard {
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(124, 226, 124, 0.3);
+    border-radius: 20px;
     max-width: 500px;
     width: 100%;
-    text-align: left;
-    border: 1px solid #CCF0CC;
-    box-sizing: border-box;
-}
-
-.perfil-experto-card h1 {
-    color: #333;
-    font-size: 1.8rem;
-    margin-bottom: 20px;
-    font-weight: 600;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
     text-align: center;
 }
 
-.perfil-experto-info p {
-    margin: 10px 0;
-    color: #555;
-    font-size: 1rem;
+.paerifleel-clientee-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0 0 30px 0;
+    color: #2c3e50;
 }
 
-.perfil-experto-info strong {
+.paerifleel-clientee-infoo {
+    width: 100%;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 15px;
+}
+
+.paerifleel-clientee-infoo p {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(5px);
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 0.95rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0;
     color: #333;
+}
+
+.paerifleel-clientee-infoo p strong {
+    color: #2c3e50;
+    margin-right: 10px;
+    white-space: nowrap;
+}
+
+/* Ajustes responsive */
+@media (max-width: 600px) {
+    .paerifleel-clientee-caard {
+        padding: 20px;
+    }
+
+    .paerifleel-clientee-title {
+        font-size: 1.5rem;
+    }
+
+    .paerifleel-clientee-infoo p {
+        font-size: 0.9rem;
+    }
 }

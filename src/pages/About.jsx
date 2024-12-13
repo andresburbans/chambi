@@ -20,6 +20,7 @@ const About = () => {
                         <p> Puedes acceder atraves del siguiente vinculo: Hosting URL: https://chambi-pro.web.app
 
                             <p>Actualmente la base de datos solo esta poblada para ejemplos con la comuna 1 y para la categoria de servicios, serivicos de "reparacion y mantenimiento" y "Reparacion de electrodomesticos"</p>
+
                         </p>
                     </p>
                 </section>

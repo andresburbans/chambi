@@ -1,4 +1,6 @@
 import React from 'react';
+import Header from '../components/Header-perfil';
+import Footer from '../components/Footer';
 import '../css/PerfilCliente.css'; // Asegúrate de que la ruta sea correcta
 
 const PerfilCliente = () => {
@@ -15,19 +17,24 @@ const PerfilCliente = () => {
     };
 
     return (
-        <div className="perfil-cliente-container">
-            <div className="perfil-cliente-card">
-                <h1>Perfil del Cliente</h1>
-                <div className="perfil-cliente-info">
-                    <p><strong>Nombre:</strong> {userData.firstName} {userData.lastName}</p>
-                    <p><strong>Correo:</strong> {userData.email}</p>
-                    <p><strong>Tipo de Documento:</strong> {userData.documentType}</p>
-                    <p><strong>Número de Documento:</strong> {userData.documentNumber}</p>
-                    <p><strong>Teléfono:</strong> {userData.phoneNumber}</p>
-                    <p><strong>Ubicación Aproximada:</strong> {userData.coordinates.latitude}, {userData.coordinates.longitude}</p>
-                    <p><strong>Comuna Cercana:</strong> {userData.nearestLocation}</p>
+        <div>
+            <Header />
+            <div className="paerifleel-clientee-containera">
+
+                <div className="paerifleel-clientee-caard">
+                    <h1 className="paerifleel-clientee-title">Perfil del Cliente</h1>
+                    <div className="paerifleel-clientee-infoo">
+                        <p><strong>Nombre:</strong> {userData.firstName} {userData.lastName}</p>
+                        <p><strong>Correo:</strong> {userData.email}</p>
+                        <p><strong>Tipo Documento:</strong> {userData.documentType}</p>
+                        <p><strong>Número Documento:</strong> {userData.documentNumber}</p>
+                        <p><strong>Teléfono:</strong> {userData.phoneNumber}</p>
+                        <p><strong>Ubicación Aproximada:</strong> {userData.coordinates.latitude}, {userData.coordinates.longitude}</p>
+                        <p><strong>Comuna Cercana:</strong> {userData.nearestLocation}</p>
+                    </div>
                 </div>
             </div>
+            <Footer />
         </div>
     );
 };
