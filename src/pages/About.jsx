@@ -26,6 +26,19 @@ const About = () => {
                 </section>
 
                 <section className="about-section">
+                    <h2>Tutorial de uso y Manual de usuario </h2>
+                    <div className="footer-content">
+                        <div className="social-icons">
+                            <p>
+                                Inicia en esta aventura accediendo al  <strong>tutorial </strong>del uso de las funciones de busqueda de Chambi <a href="https://drive.google.com/file/d/1xRe9XC90k5CHXSe1A10wMJeGsxUTD3Ig/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="X">
+                                    <img src="https://img.icons8.com/?size=100&id=AKn5i8erFg0i&format=png&color=000000" alt="Manual de usuario" /></a> y tambien te recomendamos familiarizate con Chambi leyendo el  <strong>manual de usuario</strong>  <a href="https://drive.google.com/file/d/1RcEHYVBbNCBmAr9iV4uARGHn3qOIHAiB/view?usp=sharing" target="_blank" rel="noopener noreferrer" aria-label="X">
+                                    <img src="https://img.icons8.com/?size=100&id=PaMqeFJp6WDW&format=png&color=000000" alt="Manual de usuario" /></a>. Vamos inicia la busqueda de la mano de tu mejor aliado.
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <section className="about-section">
                     <h2>El Problema</h2>
                     <p>
                         Actualmente, encontrar expertos confiables en Cali es un desafío. La información dispersa en canales informales genera desconfianza, demora y complicaciones. <strong>Chambi</strong> resuelve este problema centralizando la información y priorizando la eficiencia, la precisión y la credibilidad.
